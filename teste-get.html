@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>CEP</title>
+	<style>
+		#resultado_busca {
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<input type="number" placeholder="Digite seu CEP" id="cep">
+	<input type="button" value="Buscar" id="busca_cep">
+	<div id="resultado_busca">
+		<p id="cep">CEP: <span class="cep"></span></p>
+		<p id="rua">Rua: <span class="rua"></span></p>
+		<p id="bairro">Bairro: <span class="bairro"></span></p>
+		<p id="cidade">Cidade: <span class="cidade"></span></p>
+		<p id="estado">Estado: <span class="estado"></span></p>
+	</div>
+	<script src="jquery.js"></script>
+	<script>
+		$('#busca_cep').click(function() {
+			var cep_digitado = $('#cep').val();
+			// if(!$.isNumeric($('#cep').val()) {
+			// 	alert('Garotão, digita um CEP aí!');
+			// 	return false;
+			// };
+			$.ajax({
+				url: 'http://viacep.com.br/ws/' + cep_digitado + '/json',
+				dataType: 'json',
+				success: function(retorno) {
+					$('.cep').text(retorno.cep);
+					$('.rua').text(retorno.logradouro);
+					$('.bairro').text(retorno.bairro);
+					$('.cidade').text(retorno.localidade);
+					$('.estado').text(retorno.uf);
+				}
+			})
+			$('#resultado_busca').show();
+		});
+	</script>
+</body>
+</html>

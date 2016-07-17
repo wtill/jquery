@@ -1,2 +1,2 @@
-# jquery
-Brincadeiras feitas com jquery
+# jQuery
+Brincadeiras e estudos feitos em jquery
